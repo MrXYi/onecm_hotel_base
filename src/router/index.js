@@ -60,7 +60,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: '例子', icon: 'example'},
+    meta: { title: '例子', icon: 'example' },
     children: [
       {
         path: 'table',
@@ -73,19 +73,6 @@ export const constantRoutes = [
         name: 'Tree',
         component: () => import('@/views/tree/index'),
         meta: { title: '树', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: '表单', icon: 'form' }
       }
     ]
   },
@@ -146,6 +133,26 @@ export const constantRoutes = [
         meta: { title: '菜单2' }
       }
     ]
+  }
+]
+
+export const asyncRoutes = [
+  {
+    path: '/form',
+    component: Layout,
+    meta: {
+      title: '表单',
+      icon: 'form',
+      roles: ["admin"]
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/form/index'),
+        name: 'Form',
+        meta: { title: '表单', icon: 'form', roles: ['admin'] }
+      }
+    ]
   },
 
   {
@@ -153,14 +160,15 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: '外部链接', icon: 'link' }
+        path: 'https://github.com/PanJiaChen/vue-element-admin',
+        meta: { title: 'External Link', icon: 'link' }
       }
     ]
   },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
+
 ]
 
 const createRouter = () => new Router({
