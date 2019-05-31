@@ -53,121 +53,57 @@ export const constantRoutes = [
       component: () => import('@/views/dashboard/index'),
       meta: { title: '首页', icon: 'test' }
     }]
-  },
-
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: '例子', icon: 'example' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: '表格', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: '树', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: '嵌套',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: '菜单1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: '菜单1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: '菜单1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: '菜单1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: '菜单1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: '菜单1-3' }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        meta: { title: '菜单2' }
-      }
-    ]
   }
 ]
 
 export const asyncRoutes = [
   {
-    path: '/form',
+    path: '/hotel',
     component: Layout,
-    meta: {
-      title: '表单',
-      icon: 'form',
-      roles: ["admin"]
-    },
     children: [
       {
         path: 'index',
-        component: () => import('@/views/form/index'),
-        name: 'Form',
-        meta: { title: '表单', icon: 'form', roles: ['admin'] }
+        // component: () => import('@/views/hotel/index'),
+        meta: { title: '酒店管理', icon: 'form', roles: ['admin'] }
       }
     ]
   },
 
   {
-    path: 'external-link',
+    path: '/permission',
     component: Layout,
     children: [
       {
-        path: 'https://github.com/PanJiaChen/vue-element-admin',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'role',
+        component: () => import('@/views/permission/role'),
+        meta: { title: '权限管理', icon: 'form', roles: ['admin'] }
       }
     ]
   },
 
-  // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  {
+    path: '/settings',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        // component: () => import('@/views/hotel/index'),
+        meta: { title: '系统设置', icon: 'form', roles: ['admin'] }
+      }
+    ]
+  },
+
+  {
+    path: '/personal',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        // component: () => import('@/views/hotel/index'),
+        meta: { title: '个人中心', icon: 'form', roles: ['admin'] }
+      }
+    ]
+  }
 
 ]
 
