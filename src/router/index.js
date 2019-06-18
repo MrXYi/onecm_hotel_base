@@ -46,49 +46,50 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/home',
     children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: '首页', icon: 'test' }
+      path: 'home',
+      component: () => import('@/views/home/index'),
+      name: 'Home',
+      meta: { title: '首页', icon: 'home' }
     }]
   }
 ]
 
 export const asyncRoutes = [
   {
+    path: '/user',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/user/index'),
+        meta: { title: '用户管理', icon: 'user', roles: ['admin'] }
+      }
+    ]
+  },
+
+  {
     path: '/hotel',
     component: Layout,
+    redirect: '/hotel/hotelInfo',
+    alwaysShow: true,
+    name: 'Hotel',
+    meta: {
+      title: '酒店管理',
+      icon: 'hotel',
+      roles: ['admin']
+    },
     children: [
       {
-        path: 'index',
-        // component: () => import('@/views/hotel/index'),
-        meta: { title: '酒店管理', icon: 'form', roles: ['admin'] }
-      }
-    ]
-  },
-
-  {
-    path: '/permission',
-    component: Layout,
-    children: [
+        path: 'hotelInfo',
+        component: () => import('@/views/hotel/HotelInfo'),
+        meta: { title: '酒店信息', icon:'hotel-info' ,roles: ['admin'] }
+      },
       {
-        path: 'role',
-        component: () => import('@/views/permission/role'),
-        meta: { title: '权限管理', icon: 'form', roles: ['admin'] }
-      }
-    ]
-  },
-
-  {
-    path: '/settings',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        // component: () => import('@/views/hotel/index'),
-        meta: { title: '系统设置', icon: 'form', roles: ['admin'] }
+        path: 'hotelSetting',
+        component: () => import('@/views/hotel/HotelSetting'),
+        meta: { title: '酒店设置', icon:'hotel-settings', roles: ['admin'] }
       }
     ]
   },
@@ -96,19 +97,55 @@ export const asyncRoutes = [
   {
     path: '/personal',
     component: Layout,
+    redirect: '/personal/dataModify',
+    alwaysShow: true,
+    name: 'Personal',
+    meta: {
+      title: '个人中心',
+      icon: 'personal',
+      roles: ['admin']
+    },
+    children: [
+      {
+        path: 'dataModify',
+        component: () => import('@/views/personal/DataModify'),
+        meta: { title: '资料修改',icon:'data-modify', roles: ['admin'] }
+      },
+      {
+        path: 'accountBind',
+        component: () => import('@/views/personal/AccountBind'),
+        meta: { title: '账号绑定',icon:'account-bind', roles: ['admin'] }
+      },
+      {
+        path: 'notificationCenter',
+        component: () => import('@/views/personal/NotificationCenter'),
+        meta: { title: '通知中心',icon:'notification-center', roles: ['admin'] }
+      },
+      {
+        path: 'feedback',
+        component: () => import('@/views/personal/Feedback'),
+        meta: { title: '问题反馈',icon:'feedback', roles: ['admin'] }
+      },
+    ]
+  },
+
+  {
+    path: '/group',
+    component: Layout,
     children: [
       {
         path: 'index',
-        // component: () => import('@/views/hotel/index'),
-        meta: { title: '个人中心', icon: 'form', roles: ['admin'] }
+        component: () => import('@/views/group/index'),
+        meta: { title: '集团管理', icon: 'group', roles: ['admin'] }
       }
     ]
-  }
+  },
 
 ]
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
+  mode: 'history',
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
